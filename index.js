@@ -18,6 +18,20 @@ function shiftChar(char){
   }
 }
 
+function unShiftChar(char){
+  
+  if(char != ' '){
+    const charInt = charToInt(char)
+    if(charInt <=25 && charInt >=2){
+      return intToChar(charInt - 2)
+    }else if(charInt <= 1){
+      return intToChar(charInt + 24) //Loop back to end
+    }
+  }else if(char == ' '){
+    return char
+  }
+}
+
 const encrypt = message => (
   message
     .split('')
@@ -25,7 +39,13 @@ const encrypt = message => (
     .join('')
 );
 
-const decrypt = message => 'IMPLEMENT ME'; // Broken!
+const decrypt = message => (
+  message
+    .split('')
+    .map(unShiftChar)
+    .join('')
+
+); // Broken!
 
 module.exports = {
   decrypt,
