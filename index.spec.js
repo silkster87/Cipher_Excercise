@@ -74,7 +74,7 @@ describe('cipher-exercise', () => {
     });
   });
 
-  describe.skip('decrypt', () => {
+  describe('decrypt', () => {
     it('is a function', () => expect(typeof decrypt).toBe('function'));
     it('that takes 1 parameter', () => expect(decrypt).toHaveLength(1));
 
