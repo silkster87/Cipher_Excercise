@@ -4,7 +4,20 @@ const { charToInt, intToChar } = require('./helpers');
 
 const N = 26; // Might be useful
 
-const shiftNo = 2; //Number of places to shift
+const readline = require("readline");
+
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+let shiftNo = 2; //Number of places to shift
+
+rl.question("Enter No. of places to shift: ", answer => {
+  shiftNo = Number(answer);
+  console.log(encrypt("abc"))
+  rl.close();
+});
 
 function shiftChar(char){
 
@@ -48,6 +61,7 @@ const decrypt = message => (
     .join('')
 
 ); // Broken!
+
 
 module.exports = {
   decrypt,
