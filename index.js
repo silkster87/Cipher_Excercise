@@ -13,11 +13,42 @@ const rl = readline.createInterface({
 
 let shiftNo = 2; //Number of places to shift
 
-rl.question("Enter No. of places to shift: ", answer => {
-  shiftNo = Number(answer);
-  console.log(encrypt("abc"))
-  rl.close();
+rl.question("Enter a number: \n1 - encrypt message\n2 - decrpyt message\n3 - quit\n", answer => {
+ let userInput = Number(answer);
+  switch(userInput){
+    case 1:
+      rl.question("Enter No. of places to shift: ", shift => {
+        shiftNo = shift;
+        rl.question("Enter message to encrypt: ", message => {
+          let encryptedMsg = encrypt(message);
+          console.log(message + " encrypted to: " + encryptedMsg);
+          rl.close();
+        })
+      });
+      break;
+    case 2:
+      rl.question("Enter No. of places to unshift: ", shift => {
+        shiftNo = shift;
+        rl.question("Enter message to decrypt: ", message => {
+          let decryptedMsg = decrypt(message);
+          console.log(message + " decrypted to: " + decryptedMsg);
+          rl.close();
+        })
+      });
+      break;
+    case 3:
+      console.log("You have quit application.")
+      rl.close();
+      break;
+    }
 });
+
+
+// rl.question("Enter No. of places to shift: ", answer => {
+//   shiftNo = Number(answer);
+//   console.log(encrypt("abc"))
+//   rl.close();
+// });
 
 function shiftChar(char){
 
@@ -60,10 +91,11 @@ const decrypt = message => (
     .map(unShiftChar)
     .join('')
 
-); // Broken!
+);
 
 
 module.exports = {
   decrypt,
-  encrypt
+  encrypt,
+  shiftNo
 };
