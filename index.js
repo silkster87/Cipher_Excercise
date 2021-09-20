@@ -11,16 +11,16 @@ const rl = readline.createInterface({
     output: process.stdout
 });
 
-let shiftNo = 2; //Number of places to shift
+let shiftNo = 2; //Number of places to shift by default
 
 rl.question("Enter a number: \n1 - encrypt message\n2 - decrpyt message\n3 - quit\n", answer => {
  let userInput = Number(answer);
   switch(userInput){
     case 1:
       rl.question("Enter No. of places to shift: ", shift => {
-        shiftNo = shift;
+        shiftNo = Number(shift);
         rl.question("Enter message to encrypt: ", message => {
-          let encryptedMsg = encrypt(message);
+          let encryptedMsg = encrypt(message, shiftNo);
           console.log(message + " encrypted to: " + encryptedMsg);
           rl.close();
         })
@@ -28,9 +28,9 @@ rl.question("Enter a number: \n1 - encrypt message\n2 - decrpyt message\n3 - qui
       break;
     case 2:
       rl.question("Enter No. of places to unshift: ", shift => {
-        shiftNo = shift;
+        shiftNo = Number(shift);
         rl.question("Enter message to decrypt: ", message => {
-          let decryptedMsg = decrypt(message);
+          let decryptedMsg = decrypt(message, shiftNo);
           console.log(message + " decrypted to: " + decryptedMsg);
           rl.close();
         })
@@ -43,12 +43,6 @@ rl.question("Enter a number: \n1 - encrypt message\n2 - decrpyt message\n3 - qui
     }
 });
 
-
-// rl.question("Enter No. of places to shift: ", answer => {
-//   shiftNo = Number(answer);
-//   console.log(encrypt("abc"))
-//   rl.close();
-// });
 
 function shiftChar(char){
 
@@ -78,24 +72,18 @@ function unShiftChar(char){
   }
 }
 
-const encrypt = message => (
-  message
-    .split('')
-    .map(shiftChar)
-    .join('')
-);
+const encrypt = (message, noOfShifts = 2) => {
+  shiftNo = noOfShifts;
+  return message.split('').map(shiftChar).join('')
+}
 
-const decrypt = message => (
-  message
-    .split('')
-    .map(unShiftChar)
-    .join('')
-
-);
+const decrypt = (message, noOfShifts = 2) => {
+  shiftNo = noOfShifts;
+  return message.split('').map(unShiftChar).join('')
+}
 
 
 module.exports = {
   decrypt,
   encrypt,
-  shiftNo
 };
