@@ -2,12 +2,11 @@
 
 const cipherExercise = require('.');
 
-let shiftNo = require('./index.js');
-
 const simple = {
   message: 'abc',
   shifted: 'cde',
-  shifted3: 'def'
+  shifted3: 'def',
+  shifted4: 'efg'
 };
 
 const tricky = {
@@ -44,7 +43,7 @@ describe('cipher-exercise', () => {
 
       describe('with a simple message', () => {
         beforeEach(() => {
-          result = encrypt(simple.message);
+          result = encrypt(simple.message, 2);
         });
 
         it('returns a string', () => expect(typeof result).toBe('string'));
@@ -131,12 +130,35 @@ describe('cipher-exercise', () => {
   });
 
   //Tests for the interface - probably mock user input for shifting char
-  // describe('shift by 3 characters', () => {
+  describe('shift by 3 characters', () => {
 
-  //   let result;    
-  //   shiftNo = 3;
-  //   result = encrypt(simple.message)
+    let result;    
+    result = encrypt(simple.message, 3)
   
-  //   it('shifts characters by 3', () => expect(result).toBe(simple.shifted3));
-  // });
+    it('shifts characters by 3', () => expect(result).toBe(simple.shifted3));
+  });
+
+  describe('shift by 4 characters', () => {
+
+    let result;    
+    result = encrypt(simple.message, 4)
+  
+    it('shifts characters by 4', () => expect(result).toBe(simple.shifted4));
+  });  
+
+  describe('unshift by 3 characters', () => {
+
+    let result;    
+    result = decrypt(simple.shifted3, 3)
+  
+    it('unshifts characters by 3', () => expect(result).toBe(simple.message));
+  });  
+
+  describe('unshift by 4 characters', () => {
+
+    let result;    
+    result = decrypt(simple.shifted4, 4)
+  
+    it('unshifts characters by 4', () => expect(result).toBe(simple.message));
+  }); 
 });
