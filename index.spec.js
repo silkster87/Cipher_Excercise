@@ -2,9 +2,12 @@
 
 const cipherExercise = require('.');
 
+let shiftNo = require('./index.js');
+
 const simple = {
   message: 'abc',
-  shifted: 'cde'
+  shifted: 'cde',
+  shifted3: 'def'
 };
 
 const tricky = {
@@ -23,7 +26,10 @@ const complex = {
 };
 
 describe('cipher-exercise', () => {
+  
+
   const { decrypt, encrypt } = cipherExercise || {};
+
 
   it('is an object', () => expect(typeof cipherExercise).toBe('object'));
   it('has a decrypt property', () => expect(decrypt).toBeDefined());
@@ -120,6 +126,17 @@ describe('cipher-exercise', () => {
 
         it('restores the message', () => expect(result).toBe(complex.message));
       });
+
     });
   });
+
+  //Tests for the interface - probably mock user input for shifting char
+  // describe('shift by 3 characters', () => {
+
+  //   let result;    
+  //   shiftNo = 3;
+  //   result = encrypt(simple.message)
+  
+  //   it('shifts characters by 3', () => expect(result).toBe(simple.shifted3));
+  // });
 });
